@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>나의 첫 웹 프로젝트</title>
+</head>
+<body>
+    <h1>나의 생각 조각</h1>
+
+    <p>떠오른 생각을 자유롭게 적어보세요:</p>
+    <textarea id="thoughtInput" rows="4" cols="50"></textarea>
+    <br> <button id="saveButton">기록하기</button>
+
+    <div id="outputArea" style="margin-top: 10px;">
+        </div>
+
+    <script>
+        // 필요한 HTML 요소들을 JavaScript로 가져옵니다. ID를 사용해서 찾아요.
+        const thoughtInput = document.getElementById('thoughtInput');
+        const saveButton = document.getElementById('saveButton');
+        const outputArea = document.getElementById('outputArea');
+
+        // '기록하기' 버튼(saveButton)을 클릭했을 때 어떤 일을 할지 정해줍니다.
+        saveButton.addEventListener('click', function() {
+            // 1. 텍스트 입력 칸(thoughtInput)에 사용자가 입력한 내용을 가져옵니다.
+            const thoughtText = thoughtInput.value;
+
+            // 2. 입력 내용이 비어있지 않은지 확인합니다. (앞뒤 공백 제거하고 확인)
+            if (thoughtText.trim() !== '') {
+                // 3. 비어있지 않다면, 결과 표시 영역(outputArea)에 확인 메시지를 보여줍니다.
+                //    (실제로 저장되는 건 아니지만, 되는 것처럼 보여주는 거죠!)
+                outputArea.textContent = '💡 "' + thoughtText + '" 내용이 기록되었습니다! (실제 저장은 안 돼요!)';
+
+                // 4. 텍스트 입력 칸(thoughtInput)의 내용을 비웁니다.
+                thoughtInput.value = '';
+            } else {
+                // 5. 비어있다면, 내용을 입력하라는 메시지를 보여줍니다.
+                outputArea.textContent = '⚠️ 내용을 입력해주세요!';
+            }
+
+            // 6. (선택 사항) 확인 메시지가 3초 후에 자동으로 사라지게 합니다.
+            setTimeout(function() {
+                // 메시지가 우리가 설정한 메시지일 경우에만 지웁니다. (빠르게 여러 번 누르는 경우 대비)
+                 if (outputArea.textContent.includes('기록되었습니다!') || outputArea.textContent.includes('내용을 입력해주세요!')) {
+                   outputArea.textContent = '';
+                }
+            }, 3000); // 3000 밀리초 = 3초
+        });
+    </script>
+</body>
+</html>
+
+    </body>
+</html>
